@@ -7,6 +7,8 @@ public class MainCameraMove : MonoBehaviour
     GameObject mainCamera;
     private float cameraDestination;
     public float cameraSpeed;
+    public float cameraOffset;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,7 @@ public class MainCameraMove : MonoBehaviour
     {
         Transform mainCameraTransform = this.mainCamera.transform;
 
-        if (cameraDestination > mainCameraTransform.position.y)
+        if (cameraDestination > mainCameraTransform.position.y + cameraOffset)
         {
             mainCameraTransform.position += Vector3.up * Time.deltaTime * cameraSpeed;
         }

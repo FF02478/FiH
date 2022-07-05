@@ -28,7 +28,6 @@ public class PlayerJumping : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log(other.relativeVelocity);
         if (other.gameObject.CompareTag("Floor") && other.relativeVelocity.y >0)
         {
             this.doesCollideOnThisFrame = true;

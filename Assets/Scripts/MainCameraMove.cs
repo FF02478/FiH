@@ -4,26 +4,43 @@ using UnityEngine;
 
 public class MainCameraMove : MonoBehaviour
 {
-    GameObject player;
+    GameObject mainCamera;
+    private float cameraDestination;
+    public float cameraSpeed;
+
+    private bool doesCollideOnThisFrame;
+
     // Start is called before the first frame update
     void Start()
     {
-        this.player = GameObject.Find("Player");
+        this.mainCamera = GameObject.Find("Main Camera");
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 playerPos = this.player.transform.position;
-        
-        if(transform.position.y<playerPos.y)
-            transform.position = new Vector3(
-            transform.position.x, playerPos.y, transform.position.z);
-        else
+        Transform mainCameraTransform = this.mainCamera.transform;
+
+        // if (transform.position.y > mainCameraTransform.position.y && doesCollideOnThisFrame)
+        // {
+        //     mainCameraTransform.position = new Vector3(
+        //         mainCameraTransform.position.x, transform.position.y, mainCameraTransform.position.z);
+        //     doesCollideOnThisFrame = false;
+        // }
+
+        if (cameraDestination > mainCameraTransform.position.y)
         {
-            transform.position = new Vector3(
-                transform.position.x, transform.position.y, transform.position.z);
+            mainCameraTransform.position += Vector3.up * Time.deltaTime * cameraSpeed;
         }
-        
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log(other.relativeVelocity);
+        if (other.gameObject.CompareTag("Floor") && other.relativeVelocity.y > 0)
+        {
+            this.doesCollideOnThisFrame = true;
+            this.cameraDestination = other.transform.position.y;
+        }
     }
 }

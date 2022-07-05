@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour
 {private string deadAreaTag = "DeadArea";
@@ -19,7 +20,7 @@ public class PlayerDeath : MonoBehaviour
     {
         if(collision.tag == deadAreaTag)
         {
-            
+            SceneManager.LoadScene("Gameover");
         }
     }
 }

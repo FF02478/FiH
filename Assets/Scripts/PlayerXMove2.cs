@@ -6,6 +6,7 @@ public class PlayerXMove2 : MonoBehaviour
 {
     public float speed;
     private Rigidbody2D rb = null;
+    float xSpeed = 0.0f; 
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,7 @@ public class PlayerXMove2 : MonoBehaviour
     void Update()
     {
         float horizontalKey = Input.GetAxis("Horizontal");
-        float xSpeed = 0.0f; 
+       
         if (horizontalKey > 0)
         {
             xSpeed = speed;
